@@ -1,0 +1,170 @@
+syntax = "proto3";
+
+option go_package = "./";
+
+import "google/protobuf/timestamp.proto";
+
+message AppRequest {
+    string name = 1;
+    string latest_version = 3;
+    string running_status = 4;
+    string type = 5;
+}
+
+message AppResponse {
+    string uuid = 1;
+    string name = 2;
+    string latest_version = 3;
+    string running_status = 4;
+    string type = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message ConfigRequest {
+    string log_mode = 1;
+    string migration_db = 2;
+    string server_host = 3;
+    string port = 4;
+    string access_secret = 5;
+    string refresh_secret = 6;
+    int64 access_duration = 7;
+    int64 refresh_duration = 8;
+    string app_uuid = 9;
+}
+
+message ConfigResponse {
+    string uuid = 1;
+    string log_mode = 2;
+    string migration_db = 3;
+    string server_host = 4;
+    string port = 5;
+    string access_secret = 6;
+    string refresh_secret = 7;
+    int64 access_duration = 8;
+    int64 refresh_duration = 9;
+    string app_uuid = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+}
+
+message DBInstanceRequest {
+    string app_uuid = 1;
+    string type = 2;
+    string name = 3;
+    string connection_string = 4;
+}
+
+message DBInstanceResponse {
+    string uuid = 1;
+    string app_uuid = 2;
+    string type = 3;
+    string name = 4;
+    string connection_string = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message CacheRequest {
+    string uuid = 1;
+    string app_uuid = 2;
+    string type = 3;
+    string connection_string = 4;
+}
+
+message CacheResponse {
+    string uuid = 1;
+    string app_uuid = 2;
+    string type = 3;
+    string connection_string = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message FirewallRequest {
+    string app_uuid = 1;
+    string host = 2;
+    string port = 3;
+}
+
+message FirewallResponse {
+    string uuid = 1;
+    string app_uuid = 2;
+    string host = 3;
+    string port = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message PlatformRequest {
+    string app_uuid = 1;
+    string name = 2;
+    string code = 3;
+    string status = 4;
+}
+
+message PlatformResponse {
+    string uuid = 1;
+    string app_uuid = 2;
+    string name = 3;
+    string code = 4;
+    string status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message UserRequest {
+    string first_name = 1;
+    string last_name = 2;
+    int64 dob = 3;
+    string email = 4;
+    string username = 5;
+    string password = 6;
+}
+
+message UserResponse {
+    string uuid = 1;
+    string first_name = 2;
+    string last_name = 3;
+    int64 dob = 4;
+    string email = 5;
+    string username = 6;
+    string password = 7;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+}
+
+message GetRequest {
+    string uuid = 1;
+}
+
+message PlatformResponses {
+    repeated PlatformResponse platforms = 1;
+}
+
+message GetUserRequest {
+    string uuid = 1;
+}
+
+service AppService {
+    rpc CreateApp(AppRequest) returns (AppResponse);
+    rpc GetApp(GetRequest) returns (AppResponse);
+
+    rpc CreateConfig(ConfigRequest) returns (ConfigResponse);
+    rpc GetConfig(GetRequest) returns (ConfigResponse);
+
+    rpc CreateDB(DBInstanceRequest) returns (DBInstanceResponse);
+    rpc GetDB(GetRequest) returns (DBInstanceResponse);
+
+    rpc CreateCache(CacheRequest) returns (CacheResponse);
+    rpc GetCache(GetRequest) returns (CacheResponse);
+
+    rpc CreateFirewall(FirewallRequest) returns (FirewallResponse);
+    rpc GetFirewall(GetRequest) returns (FirewallResponse);
+
+    rpc CreatePlatform(PlatformRequest) returns (PlatformResponse);
+    rpc GetPlatforms(GetRequest) returns (PlatformResponses);
+
+    rpc CreateUser(UserRequest) returns (UserResponse);
+    rpc GetUser(GetUserRequest) returns (UserResponse);
+}

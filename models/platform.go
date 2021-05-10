@@ -1,7 +1,7 @@
 package models
 
 import (
-	appService "gRPC/app_services/internal/services"
+	appService "app-services/internal/services"
 	"time"
 )
 
@@ -12,7 +12,7 @@ type Platform struct {
 	Status string `json:"status"`
 
 	AppUUID string `json:"app_uuid"`
-	App     *App   `json:"app" gorm:"foreignKey:AppUUID"`
+	App     App    `json:"app" gorm:"foreignKey:AppUUID"`
 
 	Users []User `json:"users" gorm:"many2many:user_platforms"`
 

@@ -1,21 +1,18 @@
 package gorm_migrate
 
 import (
-	"gRPC/app_services/models"
+	"app-services/models"
+
 	"gorm.io/gorm"
 )
 
 func NewMigrate(db *gorm.DB) error {
 	return db.AutoMigrate(
-			&models.Database{},
-			&models.Firewall{},
-			&models.Cache{},
+		&models.App{},
+		&models.Firewall{},
+		&models.Config{},
 
-			&models.Config{},
-			&models.App{},
-
-			&models.Platform{},
-			&models.User{},
-		)
+		&models.Platform{},
+		&models.User{},
+	)
 }
-

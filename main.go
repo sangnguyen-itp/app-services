@@ -1,19 +1,20 @@
 package main
 
 import (
+	"app-services/database"
+	"app-services/implementation"
 	"fmt"
-	"gRPC/app_services/implementation"
-	"github.com/joho/godotenv"
-	"google.golang.org/grpc"
 	"net"
 	"os"
 
-	"gRPC/app_services/database"
-	appService "gRPC/app_services/internal/services"
+	"github.com/joho/godotenv"
+	"google.golang.org/grpc"
+
+	appService "app-services/internal/services"
 )
 
 func init() {
-	if err := godotenv.Load("app_services/app.env"); err != nil {
+	if err := godotenv.Load(); err != nil {
 		panic(err)
 	}
 }
@@ -29,7 +30,7 @@ func main() {
 	srv := grpc.NewServer()
 	appService.RegisterAppServiceServer(srv, appServer)
 
-	listener, err := net.Listen("tcp", ":" + os.Getenv("API_PORT"))
+	listener, err := net.Listen("tcp", ":"+os.Getenv("API_PORT"))
 	if err != nil {
 		panic(err)
 	}

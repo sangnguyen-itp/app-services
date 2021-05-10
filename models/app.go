@@ -1,7 +1,7 @@
 package models
 
 import (
-	appService "gRPC/app_services/internal/services"
+	appService "app-services/internal/services"
 	"time"
 )
 
@@ -14,8 +14,6 @@ type App struct {
 
 	Platforms []*Platform `json:"platforms" gorm:"foreignKey:AppUUID"`
 	Firewall  Firewall    `json:"firewall" gorm:"foreignKey:AppUUID"`
-	Database  Database    `json:"database" gorm:"foreignKey:AppUUID"`
-	Cache     Cache       `json:"cache" gorm:"foreignKey:AppUUID"`
 
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`

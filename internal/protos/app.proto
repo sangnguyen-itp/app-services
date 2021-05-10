@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "./";
+option go_package = "protos/services";
 
 import "google/protobuf/timestamp.proto";
 
@@ -46,39 +46,6 @@ message ConfigResponse {
     string app_uuid = 10;
     google.protobuf.Timestamp created_at = 11;
     google.protobuf.Timestamp updated_at = 12;
-}
-
-message DBInstanceRequest {
-    string app_uuid = 1;
-    string type = 2;
-    string name = 3;
-    string connection_string = 4;
-}
-
-message DBInstanceResponse {
-    string uuid = 1;
-    string app_uuid = 2;
-    string type = 3;
-    string name = 4;
-    string connection_string = 5;
-    google.protobuf.Timestamp created_at = 6;
-    google.protobuf.Timestamp updated_at = 7;
-}
-
-message CacheRequest {
-    string uuid = 1;
-    string app_uuid = 2;
-    string type = 3;
-    string connection_string = 4;
-}
-
-message CacheResponse {
-    string uuid = 1;
-    string app_uuid = 2;
-    string type = 3;
-    string connection_string = 4;
-    google.protobuf.Timestamp created_at = 5;
-    google.protobuf.Timestamp updated_at = 6;
 }
 
 message FirewallRequest {
@@ -152,12 +119,6 @@ service AppService {
 
     rpc CreateConfig(ConfigRequest) returns (ConfigResponse);
     rpc GetConfig(GetRequest) returns (ConfigResponse);
-
-    rpc CreateDB(DBInstanceRequest) returns (DBInstanceResponse);
-    rpc GetDB(GetRequest) returns (DBInstanceResponse);
-
-    rpc CreateCache(CacheRequest) returns (CacheResponse);
-    rpc GetCache(GetRequest) returns (CacheResponse);
 
     rpc CreateFirewall(FirewallRequest) returns (FirewallResponse);
     rpc GetFirewall(GetRequest) returns (FirewallResponse);

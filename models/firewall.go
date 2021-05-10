@@ -1,7 +1,7 @@
 package models
 
 import (
-	appService "gRPC/app_services/internal/services"
+	appService "app-services/internal/services"
 	"time"
 )
 

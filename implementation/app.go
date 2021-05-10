@@ -1,15 +1,16 @@
 package implementation
 
 import (
+	"app-services/models"
+	"app-services/utils"
 	"context"
 	"errors"
-	"gRPC/app_services/models"
-	"gRPC/app_services/utils"
+
+	"github.com/mitchellh/mapstructure"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"gorm.io/gorm"
-	"github.com/mitchellh/mapstructure"
 
-	appService "gRPC/app_services/internal/services"
+	appService "app-services/internal/services"
 )
 
 type IApp interface {
@@ -18,12 +19,6 @@ type IApp interface {
 
 	CreateConfig(ctx context.Context, request *appService.ConfigRequest) (*appService.ConfigResponse, error)
 	GetConfig(ctx context.Context, request *appService.GetRequest) (*appService.ConfigResponse, error)
-
-	CreateDB(ctx context.Context, request *appService.DBInstanceRequest) (*appService.DBInstanceResponse, error)
-	GetDB(ctx context.Context, request *appService.GetRequest) (*appService.DBInstanceResponse, error)
-
-	CreateCache(ctx context.Context, request *appService.CacheRequest) (*appService.CacheResponse, error)
-	GetCache(ctx context.Context, request *appService.GetRequest) (*appService.CacheResponse, error)
 
 	CreateFirewall(ctx context.Context, request *appService.FirewallRequest) (*appService.FirewallResponse, error)
 	GetFirewall(ctx context.Context, request *appService.GetRequest) (*appService.FirewallResponse, error)
@@ -83,22 +78,6 @@ func (a AppImpl) CreateConfig(ctx context.Context, request *appService.ConfigReq
 }
 
 func (a AppImpl) GetConfig(ctx context.Context, request *appService.GetRequest) (*appService.ConfigResponse, error) {
-	panic("implement me")
-}
-
-func (a AppImpl) CreateDB(ctx context.Context, request *appService.DBInstanceRequest) (*appService.DBInstanceResponse, error) {
-	panic("implement me")
-}
-
-func (a AppImpl) GetDB(ctx context.Context, request *appService.GetRequest) (*appService.DBInstanceResponse, error) {
-	panic("implement me")
-}
-
-func (a AppImpl) CreateCache(ctx context.Context, request *appService.CacheRequest) (*appService.CacheResponse, error) {
-	panic("implement me")
-}
-
-func (a AppImpl) GetCache(ctx context.Context, request *appService.GetRequest) (*appService.CacheResponse, error) {
 	panic("implement me")
 }
 

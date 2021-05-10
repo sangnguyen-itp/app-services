@@ -1,11 +1,12 @@
 package database
 
 import (
+	gorm_migrate "app-services/migration/gorm-migrate"
 	"fmt"
-	gorm_migrate "gRPC/app_services/migration/gorm-migrate"
+	"os"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"os"
 )
 
 type Database struct {
@@ -18,7 +19,7 @@ func newDBContainer(db *gorm.DB) *Database {
 	return &Database{DB: db}
 }
 
-func (c *Database) migrateDatabase()  {
+func (c *Database) migrateDatabase() {
 	if os.Getenv("MIGRATION") == "yes" {
 		gorm_migrate.NewMigrate(c.DB)
 	}
@@ -56,5 +57,3 @@ func (c *Database) connectDatabase() (*gorm.DB, error) {
 		DisableForeignKeyConstraintWhenMigrating: true,
 	})
 }
-
-
